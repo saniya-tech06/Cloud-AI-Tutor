@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", "Segoe UI", system-ui, sans-serif;
+}
+
+@layer base {
+  html { background: #020617; }
+  body { min-width: 320px; background: #020617; color: #f8fafc; font-family: var(--font-sans); }
+  * { box-sizing: border-box; }
+  ::selection { background: rgb(59 130 246 / 0.35); color: white; }
+  button, a, input, textarea, select { -webkit-tap-highlight-color: transparent; }
+  button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible { outline: 2px solid #60a5fa; outline-offset: 2px; }
+}
+
+@layer utilities {
+  .overview-hero {
+    background: linear-gradient(118deg, #12366f 0%, #1d5bb8 48%, #4338a5 100%);
+  }
+  .min-h-screen.bg-slate-950 { background-image: radial-gradient(circle at 12% -5%, rgb(37 99 235 / 0.14), transparent 30rem), radial-gradient(circle at 92% 10%, rgb(79 70 229 / 0.10), transparent 28rem); }
+  .bg-slate-900 { box-shadow: 0 14px 45px rgb(2 6 23 / 0.16); }
+}
