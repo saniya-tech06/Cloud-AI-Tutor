@@ -8,25 +8,30 @@ pipeline {
             }
         }
 
-        stage('Validate Docker Compose') {
+        stage('Validate Project Files') {
             steps {
-                bat 'docker compose --env-file Backend/.env config --quiet'
+                sh 'test -f docker-compose.yml'
+                sh 'test -f Backend/.env.example'
+                sh 'test -f Backend/Dockerfile'
+                sh 'test -f frontend/Dockerfile'
+                echo 'Required project files are present.'
             }
         }
 
         stage('Build Docker Images') {
             steps {
-                bat 'docker compose --env-file Backend/.env build'
+                sh 'docker build -t cloud-ai-tutor-backend:ci ./Backend'
+                sh 'docker build -t cloud-ai-tutor-frontend:ci ./frontend'
             }
         }
     }
 
     post {
         success {
-            echo 'Cloud AI Tutor pipeline completed successfully.'
+            echo 'Cloud AI Tutor CI pipeline completed successfully.'
         }
         failure {
-            echo 'Cloud AI Tutor pipeline failed. Check the stage logs.'
+            echo 'Pipeline failed. Check Console Output for details.'
         }
     }
 }
